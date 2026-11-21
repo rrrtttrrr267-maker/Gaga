@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кафе «Моряк»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b2a5b;--sea:#1f6fd1;--foam:#fff;--sky:#e8f1fc;--ink:#0f1d36;--muted:#4d607f;--line:#c9dbf3;
+  --bg:var(--foam);--surface:var(--sky);--text:var(--ink);--head:var(--navy);--stripe:var(--sea);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#07162f;--surface:#0e2347;--text:#e6eefb;--muted:#9db3d6;--head:#fff;--line:#23407a;--stripe:#2f7fe0}}
+:root[data-theme="dark"]{--bg:#07162f;--surface:#0e2347;--text:#e6eefb;--muted:#9db3d6;--head:#fff;--line:#23407a;--stripe:#2f7fe0}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Rubik,system-ui,sans-serif;padding-bottom:76px}
+h1,h2,h3{font-family:Oswald,Impact,sans-serif;color:var(--head);margin:0;line-height:1.05}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--sea);outline-offset:3px}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;gap:12px}
+nav b{font:700 22px Oswald,sans-serif;color:var(--head);letter-spacing:.04em}
+nav b span{display:inline-block;transform-origin:50% 0;animation:swing 3.2s ease-in-out infinite}
+nav div{display:flex;gap:18px;font-weight:500}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--sea)}
+
+.hero{background:linear-gradient(180deg,var(--bg) 50%,var(--stripe) 50%);background-size:100% 52px;animation:waves 5s linear infinite;padding:56px 0 64px;border-block:6px solid var(--head);overflow:hidden}
+.porthole{width:min(86vw,420px);aspect-ratio:1;margin:0 auto;border-radius:50%;background:var(--bg);border:14px solid var(--head);box-shadow:0 0 0 6px var(--bg),0 0 0 9px var(--head);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;animation:drop 1s cubic-bezier(.2,1.4,.4,1) both,rock 6s ease-in-out 1s infinite}
+.porthole h1{font-size:clamp(52px,16vw,96px);letter-spacing:.02em}
+.porthole p{margin:8px 0 18px;color:var(--muted);max-width:24ch}
+.btn{display:inline-block;background:var(--head);color:var(--bg);padding:12px 26px;border-radius:999px;text-decoration:none;font-weight:500;border:0;transition:transform .2s,background .2s}
+.btn:hover{background:var(--sea);color:#fff;transform:scale(1.05)}
+.btn:active{transform:scale(.96)}
+.fl{position:absolute;font-size:34px;animation:float 4s ease-in-out infinite}
+.heroin{position:relative}
+
+section{padding:64px 0}
+h2{font-size:clamp(34px,8vw,52px);margin-bottom:24px}
+.tag{display:inline-block;vertical-align:middle;font:500 14px Rubik,sans-serif;background:var(--sea);color:#fff;border-radius:999px;padding:3px 12px;margin-left:8px}
+.about p{max-width:60ch;margin:0}
+.facts{display:grid;gap:12px;grid-template-columns:repeat(3,1fr);margin-top:28px}
+.facts div{border-left:4px solid var(--sea);padding-left:12px;color:var(--muted);font-size:15px}
+.facts strong{display:block;font:700 26px Oswald,sans-serif;color:var(--head)}
+
+.menu{background:var(--surface)}
+h3{font-size:26px;padding-bottom:8px;border-bottom:3px solid var(--head);margin:36px 0 16px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.card{background:var(--bg);border:2px solid var(--line);border-radius:18px;padding:14px;text-align:center;display:flex;flex-direction:column;gap:6px;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:var(--sea)}
+.card .em{font-size:54px;line-height:1.1;display:block;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.card:hover .em{transform:scale(1.2) rotate(-8deg)}
+.card b{font-weight:500;line-height:1.25;flex:1}
+.card .pr{font:700 20px Oswald,sans-serif;color:var(--head)}
+.add{background:var(--head);color:var(--bg);border:0;border-radius:999px;padding:8px;font-weight:500;transition:transform .15s,background .2s}
+.add:hover{background:var(--sea);color:#fff}
+.add:active{transform:scale(.92)}
+
+.del{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.box{background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:20px}
+.box h3{margin-top:0;font-size:22px}
+.line{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.line .n{flex:1}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:30px;height:30px;border-radius:50%;border:2px solid var(--head);background:var(--bg);color:var(--head);font-weight:700;line-height:1}
+.total{display:flex;justify-content:space-between;font:700 24px Oswald,sans-serif;color:var(--head);margin:14px 0}
+.empty{color:var(--muted)}
+.field{width:100%;padding:12px 14px;margin-bottom:10px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--text);font:inherit}
+.field:focus{border-color:var(--sea);outline:0}
+.note{color:var(--muted);font-size:15px;margin:0 0 14px}
+.bump{animation:bump .35s}
+
+.contacts{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.contacts h3{font-size:22px;margin-top:0}
+.contacts p{margin:0}
+footer{background:var(--head);color:var(--bg);text-align:center;padding:24px 20px;font-size:15px}
+
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;justify-content:space-between;align-items:center;background:var(--head);color:var(--bg);border-radius:999px;padding:12px 22px;text-decoration:none;font-weight:500;max-width:520px;margin:0 auto;box-shadow:0 6px 20px rgba(11,42,91,.35)}
+.toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--sea);color:#fff;padding:12px 20px;border-radius:14px;max-width:90vw;text-align:center;opacity:0;pointer-events:none;transition:.3s;z-index:6}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.js .rv.in{opacity:1;transform:none}
+
+@keyframes waves{to{background-position-y:52px}}
+@keyframes drop{from{transform:translateY(-120%) scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes rock{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes swing{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes bump{50%{transform:scale(1.06)}}
+@media (max-width:560px){nav div{gap:12px;font-size:15px}.facts{grid-template-columns:1fr}.fl{font-size:26px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <nav>
+    <b><span>⚓</span> МОРЯК</b>
+    <div><a href="#menu">Меню</a><a href="#delivery">Доставка</a><a href="#contacts">Контакты</a></div>
+  </nav>
+</header>
+
+<div class="hero"><div class="wrap heroin">
+  <span class="fl" style="left:4%;top:-30px">🐚</span>
+  <span class="fl" style="right:4%;top:10px;animation-delay:-1.5s">🦀</span>
+  <span class="fl" style="left:10%;bottom:-40px;animation-delay:-2.5s">🐟</span>
+  <div class="porthole">
+    <h1>Моряк</h1>
+    <p>Кафе с морским характером: рыба, морепродукты и крепкий кофе</p>
+    <a class="btn" href="#menu">Смотреть меню</a>
+  </div>
+</div></div>
+
+<section id="about"><div class="wrap about rv">
+  <h2>Свежий улов каждый день</h2>
+  <p>«Моряк» — уютное кафе у воды. Рыбу и морепродукты привозим утром, готовим на гриле и на пару, подаём без лишних украшений. Приходите на обед, ужин или заказывайте домой.</p>
+  <div class="facts">
+    <div><strong>9:00–23:00</strong>открыты ежедневно</div>
+    <div><strong>Утренний улов</strong>рыба только охлаждённая</div>
+    <div><strong>Доставка</strong>по городу за 45 минут</div>
+  </div>
+</div></section>
+
+<section id="menu" class="menu"><div class="wrap">
+  <h2 class="rv">Меню</h2>
+  <div id="menuBox"></div>
+</div></section>
+
+<section id="delivery"><div class="wrap">
+  <h2 class="rv">Доставка <span class="tag">скоро</span></h2>
+  <div class="del rv">
+    <div class="box">
+      <h3>🛒 Ваш заказ</h3>
+      <div id="cart"></div>
+      <div class="total"><span>Итого</span><span id="sum">0 ₽</span></div>
+      <p class="note">Доставка 150 ₽, бесплатно от 1 500 ₽.</p>
+    </div>
+    <div class="box">
+      <h3>🛵 Куда привезти</h3>
+      <input class="field" id="fn" placeholder="Ваше имя" autocomplete="name">
+      <input class="field" id="fp" placeholder="Телефон" inputmode="tel" autocomplete="tel">
+      <input class="field" id="fa" placeholder="Адрес доставки" autocomplete="street-address">
+      <button class="btn" id="order" style="width:100%">Оформить заказ</button>
+    </div>
+  </div>
+</div></section>
+
+<section id="contacts" style="padding-top:0"><div class="wrap">
+  <h2 class="rv">Приходите в гости</h2>
+  <div class="contacts rv">
+    <div><h3>Адрес</h3><p>ул. Набережная, 12</p></div>
+    <div><h3>Телефон</h3><p><a href="tel:+70000000000">+7 (000) 000-00-00</a></p></div>
+    <div><h3>Часы работы</h3><p>Ежедневно, 9:00–23:00</p></div>
+  </div>
+</div></section>
+
+<footer>© 2026 Кафе «Моряк». Попутного ветра!</footer>
+
+<a class="bar" href="#delivery" id="bar"><span>🛒 Корзина: <span id="cnt">0</span></span><span id="bsum">0 ₽</span></a>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+document.documentElement.classList.add('js');
+var MENU=[
+ ['Горячее',[['🍲','Уха по-морскому',390],['🐟','Дорадо на гриле',790],['🦐','Креветки в чесночном масле',650],['🍝','Паста с морепродуктами',590],['🍟','Фиш-энд-чипс',520]]],
+ ['Закуски',[['🥗','Салат с кальмаром',420],['🍣','Тартар из сёмги',480],['🦪','Мидии в белом вине',560],['🥖','Брускетта с форелью',350]]],
+ ['Напитки и десерты',[['☕','Кофе',180],['🍹','Облепиховый морс',190],['🍋','Лимонад «Бриз»',220],['🍰','Чизкейк',320],['🍯','Медовик',280]]]
+];
+var cart={},items=[],fmt=function(n){return n.toLocaleString('ru-RU')+' ₽'};
+var box=document.getElementById('menuBox'),html='';
+MENU.forEach(function(g){
+  html+='<h3 class="rv">'+g[0]+'</h3><div class="grid">';
+  g[1].forEach(function(it){
+    var id=items.push(it)-1;
+    html+='<div class="card rv"><span class="em">'+it[0]+'</span><b>'+it[1]+'</b><span class="pr">'+fmt(it[2])+'</span><button class="add" data-id="'+id+'">В корзину</button></div>';
+  });
+  html+='</div>';
+});
+box.innerHTML=html;
+function toast(t){var el=document.getElementById('toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('on')},3200)}
+function render(){
+  var c=document.getElementById('cart'),sum=0,cnt=0,h='';
+  Object.keys(cart).forEach(function(id){
+    var q=cart[id],it=items[id];sum+=q*it[2];cnt+=q;
+    h+='<div class="line"><span>'+it[0]+'</span><span class="n">'+it[1]+'</span><span class="qty"><button data-m="'+id+'" aria-label="Меньше">−</button>'+q+'<button data-p="'+id+'" aria-label="Больше">+</button></span></div>';
+  });
+  c.innerHTML=h||'<p class="empty">Корзина пуста. Добавьте блюда из меню.</p>';
+  document.getElementById('sum').textContent=fmt(sum);
+  document.getElementById('bsum').textContent=fmt(sum);
+  document.getElementById('cnt').textContent=cnt;
+}
+document.addEventListener('click',function(e){
+  var t=e.target;
+  if(t.dataset.id!==undefined){cart[t.dataset.id]=(cart[t.dataset.id]||0)+1;render();var b=document.getElementById('bar');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')}
+  if(t.dataset.p!==undefined){cart[t.dataset.p]++;render()}
+  if(t.dataset.m!==undefined){if(--cart[t.dataset.m]<=0)delete cart[t.dataset.m];render()}
+});
+document.getElementById('order').onclick=function(){toast('🛵 Доставка пока не работает. Заказ не отправлен.')};
+render();
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+</script>
+</body>
+</html>
